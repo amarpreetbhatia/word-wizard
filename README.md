@@ -25,7 +25,8 @@ graph TD
     I -->|Yes| F
     I -->|No| J[Game Over]
     J --> K[Show Final Score]
-    K --> L[End]
+    K --> L[Update Words Learned]
+    L --> M[End]
 ```
 
 ## Development Process
@@ -43,11 +44,11 @@ graph TD
    - Implemented local storage to persist word lists between sessions.
 
 4. **Routing**:
-   - Used React Router for navigation between the word list manager and the game.
+   - Used React Router (HashRouter) for navigation between the word list manager and the game.
 
 5. **Game Logic**:
    - Implemented word scrambling, guessing, and scoring mechanisms.
-   - Added features like hints and text-to-speech for enhanced interactivity.
+   - Added features like hints, text-to-speech, and achievements for enhanced interactivity.
 
 6. **Styling and UI**:
    - Applied Tailwind CSS classes for responsive and attractive design.
@@ -56,6 +57,12 @@ graph TD
 7. **Error Handling and Feedback**:
    - Implemented user feedback mechanisms for correct and incorrect guesses.
    - Added loading states and error messages for improved user experience.
+
+8. **Enhancements**:
+   - Limited word lists to 10 words each with a warning message.
+   - Added status indicators for played lists and words learned.
+   - Implemented achievements and streaks to make the game more engaging.
+   - Used animations to make the game visually appealing for kids.
 
 ## How to Run Locally
 

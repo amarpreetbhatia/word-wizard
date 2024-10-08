@@ -1,7 +1,7 @@
-import React from "react";
-import { HashRouter as Router, Route, Routes } from "react-router-dom";
-import WordListManager from "./components/WordListManager";
-import WordGame from "./components/WordGame";
+import React from 'react'
+import { HashRouter as Router, Route, Routes } from 'react-router-dom'
+import WordListManager from './components/WordListManager'
+import WordGame from './components/WordGame'
 
 function App() {
   return (
@@ -9,11 +9,11 @@ function App() {
       <div className="min-h-screen bg-gray-100">
         <Routes>
           <Route path="/" element={<WordListManager />} />
-          <Route path="/game/:listId" element={<WordGame />} />
+          <Route path="/game/:listName" element={<WordGame />} />
         </Routes>
       </div>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App
