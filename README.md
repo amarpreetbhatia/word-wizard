@@ -31,30 +31,37 @@ graph TD
 
 ## Development Process
 
-1. **Project Setup**: 
+1. **Project Setup**:
+
    - Initialized a new React project using Vite with TypeScript support.
    - Set up Tailwind CSS for styling.
 
 2. **Component Development**:
+
    - Created the `WordListManager` component for managing word lists.
    - Developed the `WordGame` component for the interactive game interface.
 
 3. **State Management**:
+
    - Utilized React hooks (useState, useEffect) for local state management.
    - Implemented local storage to persist word lists between sessions.
 
 4. **Routing**:
+
    - Used React Router (HashRouter) for navigation between the word list manager and the game.
 
 5. **Game Logic**:
+
    - Implemented word scrambling, guessing, and scoring mechanisms.
    - Added features like hints, text-to-speech, and achievements for enhanced interactivity.
 
 6. **Styling and UI**:
+
    - Applied Tailwind CSS classes for responsive and attractive design.
    - Used Lucide React icons for visual elements.
 
 7. **Error Handling and Feedback**:
+
    - Implemented user feedback mechanisms for correct and incorrect guesses.
    - Added loading states and error messages for improved user experience.
 
@@ -73,11 +80,13 @@ To run this application on your local machine, follow these steps:
 2. Navigate to the project directory in your terminal.
 
 3. Install the dependencies:
+
    ```
    npm install
    ```
 
 4. Start the development server:
+
    ```
    npm run dev
    ```
@@ -87,3 +96,9 @@ To run this application on your local machine, follow these steps:
 6. You should now see the Word Wizard application running locally. Start by creating a word list in the Word List Manager, then play the game by clicking on the "Play" button next to a word list.
 
 Enjoy playing and learning with Word Wizard!
+
+## Please Note: I have Created word wizard app using Prompt engineering concepts and demo is hosting on
+
+```
+https://amarpreetbhatia.github.io/word-wizard/
+```

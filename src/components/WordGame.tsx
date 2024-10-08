@@ -24,6 +24,8 @@ const WordGame: React.FC = () => {
   const [feedback, setFeedback] = useState('');
   const [hintUsed, setHintUsed] = useState(false);
   const [achievement, setAchievement] = useState('');
+  const [remainingWords, setRemainingWords] = useState<string[]>([]);
+  const [attempts, setAttempts] = useState(0);
 
   useEffect(() => {
     const savedLists = localStorage.getItem('wordLists');
@@ -32,20 +34,25 @@ const WordGame: React.FC = () => {
       const selectedList = lists.find((list) => list.id === listId);
       if (selectedList) {
         setWordList(selectedList);
-        setNewWord(selectedList.words);
+        setRemainingWords([...selectedList.words]);
+        setNewWord([...selectedList.words]);
       }
     }
   }, [listId]);
 
   const setNewWord = (words: string[]) => {
-    const newWord = getRandomWord(words);
-    setCurrentWord(newWord);
-    setScrambledWord(scrambleWord(newWord));
-    setHintUsed(false);
-  };
-
-  const getRandomWord = (words: string[]) => {
-    return words[Math.floor(Math.random() * words.length)];
+    if (words.length > 0) {
+      const newWordIndex = Math.floor(Math.random() * words.length);
+      const newWord = words[newWordIndex];
+      setCurrentWord(newWord);
+      setScrambledWord(scrambleWord(newWord));
+      setHintUsed(false);
+      setAttempts(0);
+      setRemainingWords(words.filter((_, index) => index !== newWordIndex));
+    } else {
+      setGameOver(true);
+      updateWordList();
+    }
   };
 
   const scrambleWord = (word: string) => {
@@ -57,7 +64,9 @@ const WordGame: React.FC = () => {
 
   const handleGuess = () => {
     if (userGuess.toLowerCase() === currentWord.toLowerCase()) {
-      setScore(score + 1);
+      if (attempts === 0 || attempts >= 3) {
+        setScore(score + 1);
+      }
       setStreak(streak + 1);
       setFeedback('Correct! Great job! 🎉');
       playSound('success');
@@ -66,24 +75,15 @@ const WordGame: React.FC = () => {
       } else if (streak === 5) {
         setAchievement("Amazing! You're a Word Wizard! 🧙‍♂️");
       }
+      setNewWord(remainingWords);
     } else {
       setStreak(0);
-      setFeedback(`Oops! The correct word was "${currentWord}". Try again! 💪`);
+      setAttempts(attempts + 1);
+      setFeedback(`Oops! That's not correct. Try again! 💪`);
       playSound('error');
       setAchievement('');
     }
 
-    if (wordList) {
-      const remainingWords = wordList.words.filter(
-        (word) => word.toLowerCase() !== currentWord.toLowerCase()
-      );
-      if (remainingWords.length > 0) {
-        setNewWord(remainingWords);
-      } else {
-        setGameOver(true);
-        updateWordList();
-      }
-    }
     setUserGuess('');
   };
 
